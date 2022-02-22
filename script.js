@@ -22,11 +22,13 @@ function adbtn() {
         ulTasks.append(listItem)
         inpNewTask.val("")
         $('#btnReset').toggleClass("disabled",true)
-        $('#btnAdd').toggleClass("disabled",true)        
+        $('#btnAdd').toggleClass("disabled",true)   
+
+        
     }   
     else{
         
-
+        inpNewTask.val("")
     }
 
 
@@ -55,18 +57,14 @@ btnReset.click(()=>{
 btnClean.click(clearDone)
 
 btnSort.click(()=>{
+    togglebtn(ulTasks.children().length)
     $('#ulTasks .done').appendTo(ulTasks)
 })
 
-function toggleResetBtn(enabled){
-    if(enabled){
-        btnReset.prop('disabled',false)
-    }
-    else{
-        btnReset.prop('disabled',true)
-    }
-}
+
+
 inpNewTask.on('input',()=>{
+    togglebtn(ulTasks.children().length)
     if(inpNewTask.val().trim()==""){
         $('#btnReset').toggleClass("disabled",true)
         $('#btnAdd').toggleClass("disabled",true)
@@ -77,4 +75,26 @@ inpNewTask.on('input',()=>{
         $('#btnAdd').toggleClass("disabled",false)
     }
 
+})
+
+function togglebtn(e){
+    if(e){
+
+    }
+    else{
+       btnClean.prop("disabled",false)
+       btnSort.prop("disabled",false)
+    }
+}
+
+ulTasks.click(()=>{
+    if($('#ulTasks .done').length==0){
+        $('#btnClean').toggleClass("disabled",true)
+        $('#btnSort').toggleClass("disabled",true)   
+
+    }
+    else{
+        $('#btnClean').toggleClass("disabled",false)
+        $('#btnSort').toggleClass("disabled",false) 
+    }
 })
